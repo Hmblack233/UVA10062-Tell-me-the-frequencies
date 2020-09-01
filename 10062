@@ -1,0 +1,44 @@
+#include <iostream>
+#include<string> 
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
+int main(int argc, char** argv) {
+	int i,t,r=0;
+	string is1;
+	while(getline(cin,is1)){
+		if(r){//r!=0 換行輸出 
+			cout<<endl;//換行輸出 
+		}
+		int asc[97]={0},count[97]={0};
+		for(i=0;i<96;i++){
+			asc[i]=i+32;//??
+		}
+		for(i=0;i<is1.length();i++){
+			count[is1[i]-32]++;//?
+		}
+		for(i=0;i<96;i++){//bubble sort
+			for(t=0;t<96-i-1;t++){//次數多的放後面;次數一樣ascii code大的放後面 
+				if(count[t]>count[t+1]){
+					int temp=count[t];
+					count[t]=count[t+1];
+					count[t+1]=temp;
+					temp=asc[t];
+					asc[t]=asc[t+1];
+					asc[t+1]=temp;
+				}
+				else if(count[t]==count[t+1]&&asc[t]<asc[t+1]){
+					int temp=asc[t];
+					asc[t]=asc[t+1];
+					asc[t+1]=temp;
+				}
+			}
+		}
+		for(i=0;i<96;i++){
+			if(count[i]!=0){
+				cout<<asc[i]<<" "<<count[i]<<endl;
+			}
+		}
+		r=1;//換行輸出 
+	}
+	return 0;
+}
